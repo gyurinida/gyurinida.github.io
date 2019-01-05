@@ -6,9 +6,9 @@ permalink: /about/
 
 <img src="{{ site.baseurl }}/assets/profile-placeholder.jpeg" title="Profile Picture" class="profile">
 
-Maruader's Map by GR.
+### Maruader's Map by GR.
 
-"I solemnly swear that I am up to no perfect."
+*"I solemnly swear that I am up to no perfect."*
 
 In Harry Potter series, there is a [Marauder's Map][marauder's_map] whose purpose is mischief. It shows the location of any person or ghost on Hogwart’s grounds, isn’t fooled by an Animagus or an Invisibility Cloak. Users have to say 'I solemnly swear that I am up to no good' to use it.
 
@@ -18,7 +18,7 @@ Maruader's Map by GR shows the things I learned and done and the trial-and-error
 
 If you're curious about my projects, please visit my [GitHub][github] or contact me.
 
-"Mischeif Managed!✨"
+*"Mischeif Managed!✨"*
 
 [marauder's_map]: https://www.pottermore.com/explore-the-story/marauders-map
 [github]: https://github.com/gyurinida

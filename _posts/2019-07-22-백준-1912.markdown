@@ -8,7 +8,7 @@ tags: DP 백준
 
 ## 문제
 <a href="https://www.acmicpc.net/problem/1912" target="blank">
-  <img src="/assets/images/algorithm/백준_1912_문제.png" title="[백준] 1912 연속합">
+  <img src="{{ site.baseurl }}/assets/algorithm/백준_1912_문제.png" title="[백준] 1912 연속합">
 </a>
 
 ## 아이디어

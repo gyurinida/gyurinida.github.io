@@ -1,0 +1,104 @@
+---
+layout: post
+title:  "[백준] 1912 연속합"
+author: Gyurin
+categories: algorithm
+tags: DP 백준
+---
+
+## 문제
+<a href="https://www.acmicpc.net/problem/1912" target="blank">
+  <img src="/assets/images/algorithm/백준_1912_문제.png" title="[백준] 1912 연속합">
+</a>
+
+## 아이디어
+1. 변수 <br>
+1) `arr[i]`: input으로 받은 수열 <br>
+2) `maxEndingAt[i]`: arr[i]로 끝나는 최대 연속 합 <br>
+    => max(maxEndingAt[i]) 이 정답이 된다.
+
+2. 알고리즘<br>
+    `maxEndingAt`의 값을 채우기 위해 `arr[i]`로 끝나는 모든 수열을 탐색해도 되지만, 조금만 생각해보면 좀 더 효율적인 방법이 있다. `maxEndingAt[i]`의 정의상, `arr[i]`로 끝나는 수열이 대상이므로, `arr[i]`은 무조건 포함된다. 그러므로 최대합은 `arr[i]`이 단독으로 최대가 되거나, 이전까지의 최대합인 `maxEndingAt[i-1]`에 `arr[i]`이 더해진 게 최대가 된다.<br>
+
+    즉, <code>maxEndingAt[i] = max(maxEndingAt[i-1]+arr[i], arr[i])</code>이다.
+
+3. 예시적용<br>
+    <table border="2px" style="text-align: center;">
+        <tr>
+            <td> index </td>
+            <td> 0 </td>
+            <td> 1 </td>
+            <td> 2 </td>
+            <td> 3 </td>
+            <td> 4 </td>
+        </tr>
+        <tr>
+            <td> arr[i] </td>
+            <td> 10 </td>
+            <td> -4 </td>
+            <td> 3 </td>
+            <td> 1 </td>
+            <td> 5 </td>
+        </tr>
+        <tr>
+            <td> maxEndingAt[i] </td>
+            <td> 10 </td>
+            <td> 6 </td>
+            <td> 9 </td>
+            <td> 10 </td>
+            <td> 15 </td>
+        </tr>
+    </table>
+
+    `maxEndingAt[2]`의 경우, `arr[2]`인 3으로 끝나는 연속 수열은 (10, -4, 3), (-4, 3), (3) 으로 3가지가 있고, 각각 수열의 합은 9, -1, 3이다.
+    이 때, 최대는 (10, -4, 3)일 때인 10이므로 `maxEndingAt[2]`은 9가 된다.<br>
+    또는 2의 알고리즘을 적용하면, `maxEndingAt[1-1]+arr[i]`(6+3)과 `arr[i]`3 중 최댓값이므로 9가 된다.<br>
+
+
+
+
+
+## 코드
+
+{% highlight C++ linenos=table %}
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+const int MAX = 100001;
+int arr[MAX];
+int maxEndingAt[MAX];
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);  cout.tie(NULL);
+
+    int N;  cin >> N;
+    for(int i=1; i<=N; i++){
+        cin >> arr[i];
+    }
+
+    arr[0] = 0;
+    maxEndingAt[0] = 0;
+    for(int i=1; i<=N; i++){
+        maxEndingAt[i] = max(maxEndingAt[i-1]+arr[i], arr[i]);
+    }
+
+    int res=maxEndingAt[1];
+    for(int i=2; i<=N; i++){
+        if(maxEndingAt[i]>res)
+            res = maxEndingAt[i];
+    }
+
+    cout << res << "\n";
+
+    return 0;
+}
+{% endhighlight %}
+
+## 결과
+<img src="/assets/images/algorithm/백준_1912_결과.png" title="[백준] 1912 연속합">
+
+## 참고
+Lecture 1&2. CSI3108-01 ALGORITHM ANALYSIS. Fall 2017. Yonsei Univ.<br>
+Prof. 안형찬

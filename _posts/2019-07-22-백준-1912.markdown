@@ -1,0 +1,7 @@
+---
+layout: post
+title:  "[백준] 1912 연속합"
+author: Gyurin
+categories: algorithm
+tags: DP 백준
+---

@@ -34,6 +34,12 @@ code {
 	padding: 0 3px;
 }
 
+.highlight table td.gutter {
+    width: 2.5em;
+    padding-right: 3em;
+    color: coral;
+}
+
 pre code.hljs {
 	font-size: modular-scale(-1);
 }

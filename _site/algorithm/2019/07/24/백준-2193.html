@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>[백준] 1912 연속합</title>
+  <title>[백준] 2193 이친수</title>
   <meta name="description" content="문제  ">
   
   <meta name="author" content="Gyurin Hwang">
@@ -44,7 +44,7 @@
   <meta property="og:description" content="문제  " />
   <meta property="og:url" content="http://gyurinida.github.io" />
   <meta property="og:site_name" content="Marauders Map by GYURIN" />
-  <meta property="og:title" content="[백준] 1912 연속합" />
+  <meta property="og:title" content="[백준] 2193 이친수" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="http://gyurinida.github.io/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
@@ -55,7 +55,7 @@
   
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="[백준] 1912 연속합">
+  <meta name="twitter:title" content="[백준] 2193 이친수">
   <meta name="twitter:description" content="문제  ">
   <meta name="twitter:image" content="http://gyurinida.github.io/assets/logo.png">
   <meta name="twitter:url" content="http://gyurinida.github.io">
@@ -65,7 +65,7 @@
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://gyurinida.github.io/algorithm/2019/07/22/%EB%B0%B1%EC%A4%80-1912.html">
+  <link rel="canonical" href="http://gyurinida.github.io/algorithm/2019/07/24/%EB%B0%B1%EC%A4%80-2193.html">
   <link rel="alternate" type="application/rss+xml" title="Marauders Map by GYURIN" href="http://gyurinida.github.io/feed.xml" />
 </head>
 
@@ -115,7 +115,7 @@
 <div class="post-header-container " >
   <div class="scrim ">
     <header class="post-header">
-      <h1 class="title">[백준] 1912 연속합</h1>
+      <h1 class="title">[백준] 2193 이친수</h1>
       <p class="info">by <strong>Gyurin</strong></p>
     </header>
   </div>
@@ -130,7 +130,7 @@
  
 
 <section class="post-meta">
-  <div class="post-date">July 22, 2019</div>
+  <div class="post-date">July 24, 2019</div>
   <div class="post-categories">
   in 
     
@@ -142,56 +142,26 @@
 
 <article class="post-content">
   <h2 id="section">문제</h2>
-<p><a href="https://www.acmicpc.net/problem/1912" target="blank">
-  <img src="/assets/algorithm/BOJ-1912-problem.png" title="[백준] 1912 연속합" />
+<p><a href="https://www.acmicpc.net/problem/2193" target="blank">
+  <img src="/assets/algorithm/BOJ-2193-problem.png" title="[백준] 2193 이친수" />
 </a></p>
 
 <h2 id="section-1">아이디어</h2>
 <ol>
   <li>
-    <p>변수 <br />
-1) <code class="highlighter-rouge">arr[i]</code>: input으로 받은 수열 <br />
-2) <code class="highlighter-rouge">maxEndingAt[i]</code>: arr[i]로 끝나는 최대 연속 합 <br />
- =&gt; max(maxEndingAt[i]) 이 정답이 된다.</p>
+    <p>변수<br />
+ <code class="highlighter-rouge">dp[last][len]</code>은 길이가 <code class="highlighter-rouge">len</code>이고 <code class="highlighter-rouge">last</code>로 끝나는 이친수의 갯수를 담는다.<br /><br /></p>
   </li>
   <li>
     <p>알고리즘<br />
- <code class="highlighter-rouge">maxEndingAt</code>의 값을 채우기 위해 <code class="highlighter-rouge">arr[i]</code>로 끝나는 모든 수열을 탐색해도 되지만, 조금만 생각해보면 좀 더 효율적인 방법이 있다. <code class="highlighter-rouge">maxEndingAt[i]</code>의 정의상, <code class="highlighter-rouge">arr[i]</code>로 끝나는 수열이 대상이므로, <code class="highlighter-rouge">arr[i]</code>은 무조건 포함된다. 그러므로 최대합은 <code class="highlighter-rouge">arr[i]</code>이 단독으로 최대가 되거나, 이전까지의 최대합인 <code class="highlighter-rouge">maxEndingAt[i-1]</code>에 <code class="highlighter-rouge">arr[i]</code>이 더해진 게 최대가 된다.<br /></p>
-
-    <p>즉, <code>maxEndingAt[i] = max(maxEndingAt[i-1]+arr[i], arr[i])</code>이다.</p>
-  </li>
-  <li>
-    <p>예시적용<br /></p>
-    <table border="2px" style="text-align: center;">
-     <tr>
-         <td> index </td>
-         <td> 0 </td>
-         <td> 1 </td>
-         <td> 2 </td>
-         <td> 3 </td>
-         <td> 4 </td>
-     </tr>
-     <tr>
-         <td> arr[i] </td>
-         <td> 10 </td>
-         <td> -4 </td>
-         <td> 3 </td>
-         <td> 1 </td>
-         <td> 5 </td>
-     </tr>
-     <tr>
-         <td> maxEndingAt[i] </td>
-         <td> 10 </td>
-         <td> 6 </td>
-         <td> 9 </td>
-         <td> 10 </td>
-         <td> 15 </td>
-     </tr>
- </table>
-
-    <p><code class="highlighter-rouge">maxEndingAt[2]</code>의 경우, <code class="highlighter-rouge">arr[2]</code>인 3으로 끝나는 연속 수열은 (10, -4, 3), (-4, 3), (3) 으로 3가지가 있고, 각각 수열의 합은 9, -1, 3이다.
- 이 때, 최대는 (10, -4, 3)일 때인 10이므로 <code class="highlighter-rouge">maxEndingAt[2]</code>은 9가 된다.<br />
- 또는 2의 알고리즘을 적용하면, <code class="highlighter-rouge">maxEndingAt[1-1]+arr[i]</code>(6+3)과 <code class="highlighter-rouge">arr[i]</code>3 중 최댓값이므로 9가 된다.<br /></p>
+ bottom-up 방식으로 구현하였다.<br />
+ 길이가 n인 이친수의 맨 뒤에 한 자리를 늘려 길이가 n+1인 이친수의 개수를 확인했다.<br /><br />
+ 1) base case<br />
+     1 ≤ N ≤ 90 이므로 N이 1인 경우와, 2인 경우를 미리 계산해주었다.<br />
+     N=1인 이친수는 1<sub>(2)</sub> 한 가지이므로 <code class="highlighter-rouge">dp[0][1]=0</code>, <code class="highlighter-rouge">dp[1][1]=1</code>이 된다.<br />
+     같은 방식으로 N=2인 이친수는 10<sub>(2)</sub> 한 가지이므로 <code class="highlighter-rouge">dp[0][2]=1</code>, <code class="highlighter-rouge">dp[1][2]=0</code>이다.<br /><br />
+ 2) 11을 부분 문자열로 갖지 않음<br />
+     위의 성질을 만족하기 위해, 길이가 n인 이친수를 0으로 끝날 때, 1로 끝날 때로 분류했다. 길이가 n+1인 이친수 중 0으로 끝나는 경우는 <code class="highlighter-rouge">dp[0][n]+dp[1][n]</code>, 1로 끝나는 경우는 <code class="highlighter-rouge">dp[0][n]</code>가지이다.<br /></p>
   </li>
 </ol>
 
@@ -220,56 +190,34 @@
 21
 22
 23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33</pre></td><td class="code"><pre><span class="cp">#include &lt;iostream&gt;
-#include &lt;cmath&gt;
+24</pre></td><td class="code"><pre><span class="cp">#include &lt;iostream&gt;
 </span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAX</span> <span class="o">=</span> <span class="mi">100001</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="n">MAX</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">maxEndingAt</span><span class="p">[</span><span class="n">MAX</span><span class="p">];</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAX</span> <span class="o">=</span> <span class="mi">91</span><span class="p">;</span>
+<span class="kt">long</span> <span class="n">dp</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">MAX</span><span class="p">];</span>
 
 <span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
     <span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
     <span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>  <span class="n">cout</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
 
+    <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>   <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>   <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>   <span class="c1">// 1
+</span>    <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>   <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>   <span class="c1">// 10
+</span>
     <span class="kt">int</span> <span class="n">N</span><span class="p">;</span>  <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">N</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">N</span><span class="o">&gt;=</span><span class="mi">3</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+            <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+        <span class="p">}</span>
     <span class="p">}</span>
-
-    <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">maxEndingAt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">maxEndingAt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">maxEndingAt</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-    <span class="p">}</span>
-
-    <span class="kt">int</span> <span class="n">res</span><span class="o">=</span><span class="n">maxEndingAt</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">maxEndingAt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;</span><span class="n">res</span><span class="p">)</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="n">maxEndingAt</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-    <span class="p">}</span>
-
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">res</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
-
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">N</span><span class="p">]</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">N</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span><span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
 <h2 id="section-3">결과</h2>
-<p><img src="/assets/algorithm/BOJ-1912-result.png" title="[백준] 1912 연속합" /></p>
-
-<h2 id="section-4">참고</h2>
-<p>Lecture 1&amp;2. CSI3108-01 ALGORITHM ANALYSIS. Fall 2017. Yonsei Univ.<br />
-Prof. 안형찬</p>
+<p><img src="/assets/algorithm/BOJ-2193-result.png" title="[백준] 2193 이친수" /></p>
 
 </article>
 
@@ -290,7 +238,7 @@ Prof. 안형찬</p>
   
     
     
-      <a href="//twitter.com/share?text=%5B%EB%B0%B1%EC%A4%80%5D+1912+%EC%97%B0%EC%86%8D%ED%95%A9&url=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2019%2F07%2F22%2F%25EB%25B0%25B1%25EC%25A4%2580-1912.html&via="
+      <a href="//twitter.com/share?text=%5B%EB%B0%B1%EC%A4%80%5D+2193+%EC%9D%B4%EC%B9%9C%EC%88%98&url=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2019%2F07%2F24%2F%25EB%25B0%25B1%25EC%25A4%2580-2193.html&via="
         onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
         <i class="fa fa-twitter-square fa-lg"></i>
       </a>
@@ -305,7 +253,7 @@ Prof. 안형찬</p>
     
     
     
-      <a href="//www.facebook.com/sharer.php?t=%5B%EB%B0%B1%EC%A4%80%5D+1912+%EC%97%B0%EC%86%8D%ED%95%A9&u=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2019%2F07%2F22%2F%25EB%25B0%25B1%25EC%25A4%2580-1912.html"
+      <a href="//www.facebook.com/sharer.php?t=%5B%EB%B0%B1%EC%A4%80%5D+2193+%EC%9D%B4%EC%B9%9C%EC%88%98&u=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2019%2F07%2F24%2F%25EB%25B0%25B1%25EC%25A4%2580-2193.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -330,7 +278,7 @@ Prof. 안형찬</p>
     
     
     
-      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2019%2F07%2F22%2F%25EB%25B0%25B1%25EC%25A4%2580-1912.html"
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2019%2F07%2F24%2F%25EB%25B0%25B1%25EC%25A4%2580-2193.html"
         onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
         <i class="fa fa-linkedin-square fa-lg"></i>
       </a>
@@ -343,7 +291,7 @@ Prof. 안형찬</p>
     
     
     
-      <a href="//plus.google.com/share?title=%5B%EB%B0%B1%EC%A4%80%5D+1912+%EC%97%B0%EC%86%8D%ED%95%A9&url=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2019%2F07%2F22%2F%25EB%25B0%25B1%25EC%25A4%2580-1912.html"
+      <a href="//plus.google.com/share?title=%5B%EB%B0%B1%EC%A4%80%5D+2193+%EC%9D%B4%EC%B9%9C%EC%88%98&url=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2019%2F07%2F24%2F%25EB%25B0%25B1%25EC%25A4%2580-2193.html"
         onclick="window.open(this.href, 'google-plus-share', 'width=550,height=255');return false;">
         <i class="fa fa-google-plus-square fa-lg"></i>
       </a>
@@ -377,7 +325,7 @@ Prof. 안형찬</p>
     
     
     
-      <a href="//www.pinterest.com/pin/create/button/?description=%5B%EB%B0%B1%EC%A4%80%5D+1912+%EC%97%B0%EC%86%8D%ED%95%A9&url=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2019%2F07%2F22%2F%25EB%25B0%25B1%25EC%25A4%2580-1912.html&media=http://gyurinida.github.io/assets/header_image.jpg"
+      <a href="//www.pinterest.com/pin/create/button/?description=%5B%EB%B0%B1%EC%A4%80%5D+2193+%EC%9D%B4%EC%B9%9C%EC%88%98&url=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2019%2F07%2F24%2F%25EB%25B0%25B1%25EC%25A4%2580-2193.html&media=http://gyurinida.github.io/assets/header_image.jpg"
         onclick="window.open(this.href, 'pinterest-share', 'width=550,height=255');return false;">
         <i class="fa fa-pinterest-square fa-lg"></i>
       </a>
@@ -446,7 +394,7 @@ Prof. 안형찬</p>
     
     
     
-      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://gyurinida.github.io/algorithm/2019/07/22/%EB%B0%B1%EC%A4%80-1912.html') + '&title=[백준] 1912 연속합'; return false">
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://gyurinida.github.io/algorithm/2019/07/24/%EB%B0%B1%EC%A4%80-2193.html') + '&title=[백준] 2193 이친수'; return false">
         <i class="fa fa-reddit-square fa-lg"></i>
       </a>
     

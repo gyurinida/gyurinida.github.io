@@ -3,12 +3,12 @@ layout: post
 title:  "[백준] 1890 점프"
 author: Gyurin
 categories: algorithm
-tags: DP 백준
+tags: dp 백준
 ---
 
 ## 문제
 <a href="https://www.acmicpc.net/problem/1890" target="blank">
-  <img src="{{ site.baseurl }}/assets/algorithm/백준_1890_문제.png" title="[백준] 1890 점프">
+  <img src="{{ site.baseurl }}/assets/algorithm/BOJ-1890-problem.png" title="[백준] 1890 점프">
 </a>
 
 ## 아이디어
@@ -94,7 +94,7 @@ int main(){
 {% endhighlight %}
 
 ## 결과
-<img src="/assets/images/algorithm/백준_1890_결과.png" title="[백준] 1890 점프">
+<img src="{{site.baseurl}}/assets/algorithm/BOJ-1890-result.png" title="[백준] 1890 점프">
 
 ## 참고
 <a href="https://www.quora.com/What-are-the-sizes-and-ranges-of-int-long-int-long-long-int-and-unsigned-long-long-int-in-C-Is-there-any-other-data-type-that-can-store-greater-than-unsigned-long-long-int"> long long int의 크기 </a>

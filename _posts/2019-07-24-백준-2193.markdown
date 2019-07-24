@@ -1,0 +1,57 @@
+---
+layout: post
+title:  "[백준] 2193 이친수"
+author: Gyurin
+categories: algorithm
+tags:   dp 백준
+---
+
+## 문제
+<a href="https://www.acmicpc.net/problem/2193" target="blank">
+  <img src="{{ site.baseurl }}/assets/algorithm/BOJ-2193-problem.png" title="[백준] 2193 이친수">
+</a>
+
+## 아이디어
+1. 변수<br>
+    `dp[last][len]`은 길이가 `len`이고 `last`로 끝나는 이친수의 갯수를 담는다.<br><br>
+
+2. 알고리즘<br>
+    bottom-up 방식으로 구현하였다.<br>
+    길이가 n인 이친수의 맨 뒤에 한 자리를 늘려 길이가 n+1인 이친수의 개수를 확인했다.<br><br>
+    1) base case<br>
+        1 ≤ N ≤ 90 이므로 N이 1인 경우와, 2인 경우를 미리 계산해주었다.<br>
+        N=1인 이친수는 1<sub>(2)</sub> 한 가지이므로 `dp[0][1]=0`, `dp[1][1]=1`이 된다.<br>
+        같은 방식으로 N=2인 이친수는 10<sub>(2)</sub> 한 가지이므로 `dp[0][2]=1`, `dp[1][2]=0`이다.<br><br>
+    2) 11을 부분 문자열로 갖지 않음<br>
+        위의 성질을 만족하기 위해, 길이가 n인 이친수를 0으로 끝날 때, 1로 끝날 때로 분류했다. 길이가 n+1인 이친수 중 0으로 끝나는 경우는 `dp[0][n]+dp[1][n]`, 1로 끝나는 경우는 `dp[0][n]`가지이다.<br>
+
+## 코드
+{% highlight C++ linenos=table %}
+#include <iostream>
+using namespace std;
+
+const int MAX = 91;
+long dp[2][MAX];
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);  cout.tie(NULL);
+
+    dp[0][0] = 0;   dp[1][0] = 0;
+    dp[0][1] = 0;   dp[1][1] = 1;   // 1
+    dp[0][2] = 1;   dp[1][2] = 0;   // 10
+
+    int N;  cin >> N;
+    if(N>=3){
+        for(int i=3; i<=N; i++){
+            dp[0][i] = dp[0][i-1]+dp[1][i-1];
+            dp[1][i] = dp[0][i-1];
+        }
+    }
+    cout << dp[0][N] + dp[1][N] << "\n";
+    return 0;
+}
+{% endhighlight %}
+
+## 결과
+<img src="{{site.baseurl}}/assets/algorithm/BOJ-2193-result.png" title="[백준] 2193 이친수">

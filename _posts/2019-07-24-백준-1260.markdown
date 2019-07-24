@@ -1,0 +1,102 @@
+---
+layout: post
+title:  "[백준] 1260 DFS와 BFS"
+author: Gyurin
+categories: algorithm
+tags: DFS BFS 백준
+---
+
+
+## 문제
+<a href="https://www.acmicpc.net/problem/1260" target="blank">
+  <img src="{{site.baseurl}}/assets/algorithm/BOJ-1260-problem.png" title="[백준] 1260 DFS와 BFS">
+</a>
+
+## 아이디어
+본격적으로 코딩테스트 준비를 하면서 가장 먼저 풀었던 문제였다. 당시에는, 나에게 BFS와 DFS란 학부 수업에서 배운 그래프 탐색 방법일 뿐이었다. 어떻게 이루어지는지만 대충 기억나고 이를 이용해 문제를 푸는 등 코딩을 해본 적 없는 상태였다. 이 문제를 풀기 위해 오랜만에 자료구조 수업 강의자료를 찾아 수도코드를 확인하며 코딩을 진행하였다.<br>
+그리고 오늘, 여태까지 풀어 본 ~~몇 안되는~~ 문제들을 다시 풀어보며 이 문제를 다시 마주했을 땐, 정말 쉬운 문제였다. 그야말로 단순한 BFS와 DFS 알고리즘 정도는 누워서 떡 먹기! 17분 걸렸다. ~~다시 풀 것 같진 않지만~~ 다음엔 7분에 도전해봐야겠다.
+
+1. 변수 <br>
+    `const int MAX = 1001`: M의 최대값은 1000이지만, 정점의 번호가 1부터 1000까지라, 번호를 그대로 쓰기 위해 MAX를 1001로 잡았다.<br>
+    `vector<int> edge[MAX]`: 입력으로 받는 edge의 정보이다. `edge[i]`에는 i번 정점과 연결된 정점 번호들이 담겨있다.<br>
+    `bool vstd[MAX]`: DFS의 visited 정보를 담기 위한 변수.<br>
+    `bool vstb[MAX]`: BFS의 visited 정보를 담기 위한 변수.<br><br>
+
+2. 알고리즘<br>
+    DFS와 BFS를 그대로 구현 해 놓은 거라 알고리즘은 딱히 설명할 부분이 없다.<br>
+    다만, BFS를 구현할 때 한 가지 주의할 점은 ~~당연하게 생각해왔던 부분 일 수 도~~ 새로운 정점에 대한 방문 처리를 <b>queue에 추가할 때</b> 해주어야 한다는 것이다. 그렇지 않으면, 싸이클의 경우 무한 루프가 될 수 도 있다.<br><br>
+
+
+## 코드
+
+{% highlight C++ linenos=table %}
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <algorithm>
+using namespace std;
+
+const int MAX = 1001;
+int N, M, V;
+vector<int> edge[MAX];
+bool vstd[MAX];
+bool vstb[MAX];
+
+void dfs(int start){
+    cout << start << " ";
+
+    for(int i=0; i<edge[start].size(); i++){
+        int cur = edge[start][i];
+        if(!vstd[cur]){
+            vstd[cur] = true;
+            dfs(cur);
+        }
+    }
+}
+
+void bfs(int start){
+    vstb[start] = true;
+    queue<int> q;
+    q.push(start);
+    cout << start << " ";
+
+    while(!q.empty()){
+        int u = q.front();  q.pop();
+
+        for(int i=0; i<edge[u].size(); i++){
+            int cur = edge[u][i];
+            if(!vstb[cur]){
+                vstb[cur] = true;
+                q.push(cur);
+                cout << cur << " ";
+            }
+        }
+    }
+}
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);  cout.tie(NULL);
+
+    cin >> N >> M >> V;
+    for(int i=0; i<M; i++){
+        int x, y;  cin >> x >> y;
+
+        edge[x].push_back(y);
+        edge[y].push_back(x);
+    }
+
+    // 정렬
+    for(int i=1; i<=N; i++)
+        sort(edge[i].begin(), edge[i].end());
+
+    vstd[V] = true; dfs(V);
+    cout << "\n";
+    bfs(V);
+    cout << "\n";
+    return 0;
+}
+{% endhighlight %}
+
+## 결과
+<img src="{{site.baseurl}}/assets/algorithm/BOJ-1260-result.png" title="[백준] 1260 DFS와 BFS">

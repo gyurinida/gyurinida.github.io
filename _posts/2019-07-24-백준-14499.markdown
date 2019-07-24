@@ -1,0 +1,116 @@
+---
+layout: post
+title:  "[백준] 14499 주사위 굴리기"
+author: Gyurin
+categories: algorithm
+tags: 시뮬레이션 백준
+---
+
+
+## 문제
+<a href="https://www.acmicpc.net/problem/14499" target="blank">
+  <img src="{{site.baseurl}}/assets/algorithm/BOJ-14499-problem.png" title="[백준] 14499 주사위 굴리기">
+</a>
+
+## 아이디어
+1. 변수 <br>
+    `int dice[6] = {0, 0, 0, 0, 0, 0}`: 주사위 각 면에 적힘 숫자 정보를 담는다. 차례대로 위, 아래, 앞, 뒤, 왼쪽, 오른쪽<br>
+    `enum pos{top, btm, frnt, bck, lft, rgt}`: dice에 접근할 때, 인덱스로 접근하면 어느 면일지 헷갈려서 enum을 이용했다. 지난번 코드에는 `const int`를 이용했었다. ~~enum을 안 써봐서 써보고 싶었음.~~<br>
+
+2. 알고리즘<br>
+    ~~알고리즘이라고 할 것도 없다.~~ 각 방향으로 굴릴 때마다 우선, 새로운 위치가 범위에 벗어나는지를 확인한다. 벗어나면 return으로 바로 종료. 굴릴 수 있다면 방향에 맞게 적절하게 주사위 숫자들을 바꿔준다. 그 후 주사위 윗면의 숫자를 출력하고, 현재 위치 `x`와 `y`를 새로운 위치로 갱신해준다.<br><br>
+
+## 코드
+
+{% highlight C++ linenos=table %}
+#include <iostream>
+using namespace std;
+
+const int MAX = 20;
+enum pos{top, btm, frnt, bck, lft, rgt};
+
+int N, M, x, y, K;
+int map[MAX][MAX];
+int dir[1000];
+int dice[6] = {0, 0, 0, 0, 0, 0};   // 위, 아래, 앞, 뒤, 왼쪽, 오른쪽
+int dr[4] = {0, 0, -1, 1};
+int dc[4] = {1, -1, 0, 0};
+
+void move(int d){
+
+    int nx = x + dr[d-1];
+    int ny = y + dc[d-1];
+
+    if(nx<0 || nx>=N || ny<0 || ny>=M)  return;
+
+    // 동
+    if(d==1){
+        int tmp = dice[top];
+        dice[top] = dice[lft];
+        dice[lft] = dice[btm];
+        dice[btm] = dice[rgt];
+        dice[rgt] = tmp;
+
+    }
+
+    // 서
+    if(d==2){
+        int tmp = dice[top];
+        dice[top] = dice[rgt];
+        dice[rgt] = dice[btm];
+        dice[btm] = dice[lft];
+        dice[lft] = tmp;
+    }
+
+    // 북
+    if(d==3){
+        int tmp = dice[top];
+        dice[top] = dice[frnt];
+        dice[frnt] = dice[btm];
+        dice[btm] = dice[bck];
+        dice[bck] = tmp;
+    }
+
+    // 남
+    if(d==4){
+        int tmp = dice[top];
+        dice[top] = dice[bck];
+        dice[bck] = dice[btm];
+        dice[btm] = dice[frnt];
+        dice[frnt] = tmp;
+    }
+
+    if(map[nx][ny]==0)
+        map[nx][ny] = dice[btm];
+    else{
+        dice[btm] = map[nx][ny];
+        map[nx][ny] = 0;
+    }
+
+    cout << dice[top] << "\n";
+    x = nx; y = ny;
+}
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);  cout.tie(NULL);
+    
+    cin >> N >> M >> x >> y >> K;
+    for(int r=0; r<N; r++){
+        for(int c=0; c<M; c++){
+            cin >> map[r][c];
+        }
+    }
+    for(int i=0; i<K; i++)
+        cin >> dir[i];
+    
+    for(int i=0; i<K; i++)
+        move(dir[i]);
+    return 0;
+}
+{% endhighlight %}
+
+## 결과
+<img src="{{site.baseurl}}/assets/algorithm/BOJ-14499-result.png" title="[백준] 14499 주사위 굴리기">
+
+## 참고

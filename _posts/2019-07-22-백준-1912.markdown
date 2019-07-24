@@ -3,12 +3,12 @@ layout: post
 title:  "[백준] 1912 연속합"
 author: Gyurin
 categories: algorithm
-tags: DP 백준
+tags: dp 백준
 ---
 
 ## 문제
 <a href="https://www.acmicpc.net/problem/1912" target="blank">
-  <img src="{{ site.baseurl }}/assets/algorithm/백준_1912_문제.png" title="[백준] 1912 연속합">
+  <img src="{{ site.baseurl }}/assets/algorithm/BOJ-1912-problem.png" title="[백준] 1912 연속합">
 </a>
 
 ## 아이디어
@@ -97,7 +97,7 @@ int main(){
 {% endhighlight %}
 
 ## 결과
-<img src="/assets/images/algorithm/백준_1912_결과.png" title="[백준] 1912 연속합">
+<img src="{{site.baseurl}}/assets/algorithm/BOJ-1912-result.png" title="[백준] 1912 연속합">
 
 ## 참고
 Lecture 1&2. CSI3108-01 ALGORITHM ANALYSIS. Fall 2017. Yonsei Univ.<br>

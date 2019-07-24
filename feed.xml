@@ -6,15 +6,108 @@
 </description>
     <link>http://gyurinida.github.io/</link>
     <atom:link href="http://gyurinida.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 22 Jul 2019 16:28:49 +0900</pubDate>
-    <lastBuildDate>Mon, 22 Jul 2019 16:28:49 +0900</lastBuildDate>
+    <pubDate>Wed, 24 Jul 2019 16:13:35 +0900</pubDate>
+    <lastBuildDate>Wed, 24 Jul 2019 16:13:35 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>[백준] 2193 이친수</title>
+        <description>&lt;h2 id=&quot;section&quot;&gt;문제&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.acmicpc.net/problem/2193&quot; target=&quot;blank&quot;&gt;
+  &lt;img src=&quot;/assets/algorithm/BOJ-2193-problem.png&quot; title=&quot;[백준] 2193 이친수&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;아이디어&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;변수&lt;br /&gt;
+ &lt;code class=&quot;highlighter-rouge&quot;&gt;dp[last][len]&lt;/code&gt;은 길이가 &lt;code class=&quot;highlighter-rouge&quot;&gt;len&lt;/code&gt;이고 &lt;code class=&quot;highlighter-rouge&quot;&gt;last&lt;/code&gt;로 끝나는 이친수의 갯수를 담는다.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;알고리즘&lt;br /&gt;
+ bottom-up 방식으로 구현하였다.&lt;br /&gt;
+ 길이가 n인 이친수의 맨 뒤에 한 자리를 늘려 길이가 n+1인 이친수의 개수를 확인했다.&lt;br /&gt;&lt;br /&gt;
+ 1) base case&lt;br /&gt;
+     1 ≤ N ≤ 90 이므로 N이 1인 경우와, 2인 경우를 미리 계산해주었다.&lt;br /&gt;
+     N=1인 이친수는 1&lt;sub&gt;(2)&lt;/sub&gt; 한 가지이므로 &lt;code class=&quot;highlighter-rouge&quot;&gt;dp[0][1]=0&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;dp[1][1]=1&lt;/code&gt;이 된다.&lt;br /&gt;
+     같은 방식으로 N=2인 이친수는 10&lt;sub&gt;(2)&lt;/sub&gt; 한 가지이므로 &lt;code class=&quot;highlighter-rouge&quot;&gt;dp[0][2]=1&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;dp[1][2]=0&lt;/code&gt;이다.&lt;br /&gt;&lt;br /&gt;
+ 2) 11을 부분 문자열로 갖지 않음&lt;br /&gt;
+     위의 성질을 만족하기 위해, 길이가 n인 이친수를 0으로 끝날 때, 1로 끝날 때로 분류했다. 길이가 n+1인 이친수 중 0으로 끝나는 경우는 &lt;code class=&quot;highlighter-rouge&quot;&gt;dp[0][n]+dp[1][n]&lt;/code&gt;, 1로 끝나는 경우는 &lt;code class=&quot;highlighter-rouge&quot;&gt;dp[0][n]&lt;/code&gt;가지이다.&lt;br /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;코드&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;iostream&amp;gt;
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MAX&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;91&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MAX&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ios&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sync_with_stdio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;cin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tie&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tie&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// 1
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// 10
+&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;cin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;결과&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/algorithm/BOJ-2193-result.png&quot; title=&quot;[백준] 2193 이친수&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 24 Jul 2019 00:00:00 +0900</pubDate>
+        <link>http://gyurinida.github.io/algorithm/2019/07/24/%EB%B0%B1%EC%A4%80-2193.html</link>
+        <guid isPermaLink="true">http://gyurinida.github.io/algorithm/2019/07/24/%EB%B0%B1%EC%A4%80-2193.html</guid>
+        
+        <category>dp</category>
+        
+        <category>백준</category>
+        
+        
+        <category>algorithm</category>
+        
+      </item>
     
       <item>
         <title>[백준] 1912 연속합</title>
         <description>&lt;h2 id=&quot;section&quot;&gt;문제&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://www.acmicpc.net/problem/1912&quot; target=&quot;blank&quot;&gt;
-  &lt;img src=&quot;/assets/algorithm/백준_1912_문제.png&quot; title=&quot;[백준] 1912 연속합&quot; /&gt;
+  &lt;img src=&quot;/assets/algorithm/BOJ-1912-problem.png&quot; title=&quot;[백준] 1912 연속합&quot; /&gt;
 &lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;section-1&quot;&gt;아이디어&lt;/h2&gt;
@@ -136,7 +229,7 @@
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h2 id=&quot;section-3&quot;&gt;결과&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/algorithm/백준_1912_결과.png&quot; title=&quot;[백준] 1912 연속합&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/algorithm/BOJ-1912-result.png&quot; title=&quot;[백준] 1912 연속합&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;section-4&quot;&gt;참고&lt;/h2&gt;
 &lt;p&gt;Lecture 1&amp;amp;2. CSI3108-01 ALGORITHM ANALYSIS. Fall 2017. Yonsei Univ.&lt;br /&gt;
@@ -146,7 +239,7 @@ Prof. 안형찬&lt;/p&gt;
         <link>http://gyurinida.github.io/algorithm/2019/07/22/%EB%B0%B1%EC%A4%80-1912.html</link>
         <guid isPermaLink="true">http://gyurinida.github.io/algorithm/2019/07/22/%EB%B0%B1%EC%A4%80-1912.html</guid>
         
-        <category>DP</category>
+        <category>dp</category>
         
         <category>백준</category>
         
@@ -159,7 +252,7 @@ Prof. 안형찬&lt;/p&gt;
         <title>[백준] 1890 점프</title>
         <description>&lt;h2 id=&quot;section&quot;&gt;문제&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://www.acmicpc.net/problem/1890&quot; target=&quot;blank&quot;&gt;
-  &lt;img src=&quot;/assets/algorithm/백준_1890_문제.png&quot; title=&quot;[백준] 1890 점프&quot; /&gt;
+  &lt;img src=&quot;/assets/algorithm/BOJ-1890-problem.png&quot; title=&quot;[백준] 1890 점프&quot; /&gt;
 &lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;section-1&quot;&gt;아이디어&lt;/h2&gt;
@@ -304,7 +397,7 @@ Prof. 안형찬&lt;/p&gt;
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h2 id=&quot;section-3&quot;&gt;결과&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/algorithm/백준_1890_결과.png&quot; title=&quot;[백준] 1890 점프&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/algorithm/BOJ-1890-result.png&quot; title=&quot;[백준] 1890 점프&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;section-4&quot;&gt;참고&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://www.quora.com/What-are-the-sizes-and-ranges-of-int-long-int-long-long-int-and-unsigned-long-long-int-in-C-Is-there-any-other-data-type-that-can-store-greater-than-unsigned-long-long-int&quot;&gt; long long int의 크기 &lt;/a&gt;&lt;/p&gt;
@@ -313,7 +406,7 @@ Prof. 안형찬&lt;/p&gt;
         <link>http://gyurinida.github.io/algorithm/2019/07/22/%EB%B0%B1%EC%A4%80-1890.html</link>
         <guid isPermaLink="true">http://gyurinida.github.io/algorithm/2019/07/22/%EB%B0%B1%EC%A4%80-1890.html</guid>
         
-        <category>DP</category>
+        <category>dp</category>
         
         <category>백준</category>
         

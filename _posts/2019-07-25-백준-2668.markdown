@@ -1,0 +1,120 @@
+---
+layout: post
+title:  "[백준] 2668 숫자고르기"
+author: Gyurin
+categories: algorithm
+tags: DFS 백준
+---
+
+
+## 문제
+<a href="https://www.acmicpc.net/problem/2668" target="blank">
+  <img src="{{site.baseurl}}/assets/algorithm/BOJ-2668-problem.png" title="[백준] 2668 숫자고르기">
+</a>
+
+## 아이디어
+이 문제는, 문제의 특성을 파악하는 것에서 시작했다. 편의를 위해 첫째줄의 값을 X, 둘째줄의 값을 Y라고 하면 입력으로 주어진 것을 함수 X->Y라고 생각할 수 있다. 그럼 문제에서 요구하는 조건은 다음을 만족하는 최대 크기의 집합을 구하는 것이 된다.
+<img src="{{site.baseurl}}/assets/algorithm/BOJ-2668-img1.png" width="50%">
+어떤 y<sub>i</sub>가 2번이상 선택되게 된다면, 반드시 한 번도 선택되지 못하는 y<sub>j</sub>가 존재히게 된다. 이는 필요충분이다. <b>선택되지 못한 y값들을 정답에 포함될 수 없다.</b> <b>반대로 모든 y가 선택된다면, 이는 각 y<sub>i</sub>들이 1번씩만 선택된 것이고,(일대일대응이 됨) 계산해보지 않아도 전체 집합이 답이 된다.</b>
+
+1. 변수 <br>
+    `const int MAX = 101`: 입력으로 주어지는 숫자들이 1이상 100이하. 최대 크기를 101로 잡아 0번째 인덱스는 쓰지 않는다.<br>
+    `int arr[MAX]`: 입력을 저장하는 변수. X->Y <br>
+    `bool vst[MAX]`: 방문정보. <br>
+    `queue<int> impsb`: 선택되지 않은 y들을 저장한다.(impossible)<br>
+    `vector<int> rvs[MAX]`: 입력받은 정보를 뒤집어 저장한 변수이다. Y->X<br>
+
+2. 알고리즘<br>
+    1) 입력 처리: Y->X, `impsb` <br>
+        : 입력을 받은 정보를 뒤집어 `vector<int> rvs[MAX]`에 저장한다. 예를 들어, `rvs[5]`은 입력에서 두 번째 줄이 5인 첫 번째 줄의 값을 담는다. 즉, y=5인 x들을 담는다.<br>
+        그 후 rvs를 탐색하여 x와 대응되지 않은 y들을 `impsb`에 넣는다.<br>
+        주어진 예시로는 다음 그림과 같이 된다. 'impsb'에는 파란색 동그라미 친 2와 7이 담긴다.
+        <img src="{{site.baseurl}}/assets/algorithm/BOJ-2668-img2.png" width="50%">
+
+    2) 문제 해결 과정: impsb의 각 원소들을 시작점으로 dfs<br>
+        : 전체집합에서 불가능한 원소들을 제거해 나가는 방법으로 진행된다. 가장 먼저 x가 없는 y들 즉, impsb에 담긴 원소를 제거하고, 그로인해 불가능해진 원소들을 계속적으로 진행된다. ~~나름 DFS?~~ 예시를 먼저 살펴보자.
+        <img src="{{site.baseurl}}/assets/algorithm/BOJ-2668-img3.png" width="50%">
+        ① 초기 상태<br> impsb = {2, 7}<br>
+        ② dfs(2)<br>
+            `arr[2]=1`이므로 rvs[1]에 가서 2를 지움. 2를 지워도 rvs[1].size()는 0이 아니므로 함수 return.<br>
+        ③ dfs(7)<br>
+            `arr[7]=6`이므로 rvs[6]에 가서 7을 지움. 7을 지우면 rvs[6].size()는 0이 되어 dfs(6)을 호출.<br>
+        ④ dfs(6)<br>
+            `arr[6]=4`이므로 rvs[4]에 가서 6을 지움. 6을 지우면 rvs[4].size()는 0이 되므로 dfs(4)를 호출.<br>
+        ⑤ dfs(4)<br>
+            `arr[4]=5`이므로 rvs[5]에 가서 4를 지움. 6을 지워도 rvs[5].size()는 0이 아니므로 함수 return.<br>
+        ⑥ 최종 상태<br> 따라서 답은 {1, 3, 5}가 된다.<br>
+
+    3) 참고<br>
+        : 굉장히 복잡하게 푼 문제지만, 다른 사람들의 코드를 보면 단순하게 반복 중첩문으로 O(n<sup>2</sup>)안에 해결한다. ~~코드가 30줄도 안된다.~~ 좀 더 문제를 단순화 시켜서 간단하게 풀 수 있는 방법을 생각해보는 노력을 해야겠다.<br>
+
+    
+## 코드
+{% highlight c++ linenos=table %}
+    #include <iostream>
+    #include <vector>
+    #include <queue>
+    using namespace std;
+
+    const int MAX = 101;
+    int N;
+    int arr[MAX];
+    vector<int> rvs[MAX];
+    queue<int> impsb;
+
+    int main(){
+        ios::sync_with_stdio(false);
+        cin.tie(NULL);  cout.tie(NULL);
+
+        cin >> N;
+        for(int i=1; i<=N; i++){
+            cin >> arr[i];
+            rvs[arr[i]].push_back(i);
+        }
+
+        bool flag = false;
+        for(int i=1; i<=N; i++){
+            if(rvs[i].size()==0){
+                flag = true;
+                impsb.push(i);
+            }
+        }
+
+        if(!flag){
+            cout << N << "\n";
+            for(int i=1; i<=N; i++)
+                cout << i << "\n";
+        }
+        else{
+            int out=0;
+            while(!impsb.empty()){
+                out++;
+                int u = impsb.front();  impsb.pop();
+                // arr[u]로 가서 u 지우기
+                for(int i=0; i<rvs[arr[u]].size(); i++){
+                    if(rvs[arr[u]][i] == u){
+                        rvs[arr[u]].erase(rvs[arr[u]].begin()+i);
+                        break;
+                    }
+                }
+                // 지운 후, arr[u]의 길이가 0이면 이어서 탐색
+                if(rvs[arr[u]].size()==0){
+                    impsb.push(arr[u]);
+                }
+            }
+
+            cout << N-out << "\n";
+            for(int i=1; i<=N; i++){
+                if(rvs[i].size()!=0)
+                    cout << i << " ";
+            }
+        
+        }
+
+        return 0;
+    }
+
+{% endhighlight %}
+
+## 결과
+<img src="{{site.baseurl}}/assets/algorithm/BOJ-2668-result.png" title="[백준] 2668 숫자고르기"><br><br>

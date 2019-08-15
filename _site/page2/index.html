@@ -134,6 +134,50 @@
   
   <li>
     <h2>
+      <a class="post-link" href="/algorithm/2019/07/25/%EB%B0%B1%EC%A4%80-11724.html">[백준] 11724 연결 요소의 개수</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>문제 아이디어 [백준] 1260 DFS와 BFS와 99% 같은 문제이다. 서로 다른 connected component에 속한 정점들은 한 번의 탐색에 대해 같이 방문될 수 없다. 그러므로 connected component의 개수를 세기 위해선, 모든 정점을 방문할 때까지 탐색한 횟수가 된다. 코드 다음은 BFS 코드이다. 1 2 3 4 5 6 7 8 9 10...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 25, 2019</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/algorithm">Algorithm</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/algorithm/2019/07/24/%EB%B0%B1%EC%A4%80-2193.html">[백준] 2193 이친수</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>문제 아이디어 변수 dp[last][len]은 길이가 len이고 last로 끝나는 이친수의 갯수를 담는다. 알고리즘 bottom-up 방식으로 구현하였다. 길이가 n인 이친수의 맨 뒤에 한 자리를 늘려 길이가 n+1인 이친수의 개수를 확인했다. 1) base case 1 ≤ N ≤ 90 이므로 N이 1인 경우와, 2인 경우를 미리 계산해주었다. N=1인 이친수는 1(2) 한 가지이므로 dp[0][1]=0,...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 24, 2019</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/algorithm">Algorithm</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
       <a class="post-link" href="/algorithm/2019/07/24/%EB%B0%B1%EC%A4%80-14502.html">[백준] 14502 연구소</a>
     </h2>
     <section class="post-excerpt" itemprop="description">
@@ -185,50 +229,6 @@
     </section>
     <section class="post-meta">
       <div class="post-date">July 24, 2019</div>
-      <div class="post-categories">
-      in 
-        
-        <a href="/category/algorithm">Algorithm</a>
-        
-      
-      </div>
-    </section>
-  </li>
-  
-  <hr>
-  
-  
-  <li>
-    <h2>
-      <a class="post-link" href="/algorithm/2019/07/22/%EB%B0%B1%EC%A4%80-1912.html">[백준] 1912 연속합</a>
-    </h2>
-    <section class="post-excerpt" itemprop="description">
-      <p>문제 아이디어 변수 1) arr[i]: input으로 받은 수열 2) maxEndingAt[i]: arr[i]로 끝나는 최대 연속 합 =&gt; max(maxEndingAt[i]) 이 정답이 된다. 알고리즘 maxEndingAt의 값을 채우기 위해 arr[i]로 끝나는 모든 수열을 탐색해도 되지만, 조금만 생각해보면 좀 더 효율적인 방법이 있다. maxEndingAt[i]의 정의상, arr[i]로 끝나는 수열이 대상이므로, arr[i]은 무조건 포함된다. 그러므로 최대합은 arr[i]이...</p>
-    </section>
-    <section class="post-meta">
-      <div class="post-date">July 22, 2019</div>
-      <div class="post-categories">
-      in 
-        
-        <a href="/category/algorithm">Algorithm</a>
-        
-      
-      </div>
-    </section>
-  </li>
-  
-  <hr>
-  
-  
-  <li>
-    <h2>
-      <a class="post-link" href="/algorithm/2019/07/22/%EB%B0%B1%EC%A4%80-1890.html">[백준] 1890 점프</a>
-    </h2>
-    <section class="post-excerpt" itemprop="description">
-      <p>문제 아이디어 변수 1) map[r][c]: input으로 받은 게임판 정보 2) dp[r][c]: map[r][c]에서 문제의 규칙에 맞게 갈 수 있는 경로의 개수 =&gt; dp[0][0]이 정답이 된다. 알고리즘 반드시 오른쪽 또는 아래쪽으로 이동해야 하므로, map[r][c]의 값이 j일때 map[r][c]에서 갈 수 있는 곳은 map[r+j][c] 또는 map[r][c+j] 2 곳이다. 즉, 경로의 개수는 dp[r][c] = dp[r+j][c]...</p>
-    </section>
-    <section class="post-meta">
-      <div class="post-date">July 22, 2019</div>
       <div class="post-categories">
       in 
         

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>[백준] 2156 포도주 시식</title>
+  <meta name="description" content="문제  ">
+  
+  <meta name="author" content="Gyurin Hwang">
+  <meta name="copyright" content="&copy; Gyurin Hwang 2019">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="문제  " />
+  <meta property="og:url" content="http://gyurinida.github.io" />
+  <meta property="og:site_name" content="Marauders Map by GYURIN" />
+  <meta property="og:title" content="[백준] 2156 포도주 시식" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://gyurinida.github.io/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[백준] 2156 포도주 시식">
+  <meta name="twitter:description" content="문제  ">
+  <meta name="twitter:image" content="http://gyurinida.github.io/assets/logo.png">
+  <meta name="twitter:url" content="http://gyurinida.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://gyurinida.github.io/algorithm/2019/08/15/%EB%B0%B1%EC%A4%80-2156.html">
+  <link rel="alternate" type="application/rss+xml" title="Marauders Map by GYURIN" href="http://gyurinida.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Marauders Map by GYURIN">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+          <li class="nav-link"><a href="/typography/">Typography</a>
+          
+        
+          
+        
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">[백준] 2156 포도주 시식</h1>
+      <p class="info">by <strong>Gyurin</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">August 15, 2019</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/algorithm">Algorithm</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h2 id="section">문제</h2>
+<p><a href="https://www.acmicpc.net/problem/2156" target="blank">
+  <img src="/assets/algorithm/BOJ-2156-problem.png" title="[백준] 2156 포도주 시식" />
+</a></p>
+
+<h2 id="section-1">아이디어</h2>
+<ol>
+  <li>
+    <p>변수 <br />
+ <code class="highlighter-rouge">int wine[MAX]</code>: 압력으로 받은 포도주의 양.<br />
+ <code class="highlighter-rouge">int dp[n][4]</code>: n번쨰 와인에 대한 dp 값.<br />
+         <code class="highlighter-rouge">int dp[n][0]</code>: n번째를 안 마셨을 때 최대 포도주의 양.<br />
+         <code class="highlighter-rouge">int dp[n][1]</code>: n번째를 마셨고, n-1번째를 안마셨을 때 최대 포도주의 양.<br />
+         <code class="highlighter-rouge">int dp[n][2]</code>: n번째를 마셨고, n-1번째도 마셨을 때 최대 포도주의 양.<br />
+         <code class="highlighter-rouge">int dp[n][3]</code>: [0], [1], [2] 중 최대값. 점화식에서 이전 인덱스의 최대값을 계속 계산하기 때문에, 아예 열을 추가해 값을 저장하였다.<br /></p>
+  </li>
+  <li>
+    <p>알고리즘<br />
+ 처음에는 dp의 가장 전형적인 문제 중 하나인 계단 오르기 문제와 유사하다는 생각을 하며 풀었다. 그래서 직전의 포도주를 마셨을 때와 마시지 않았을 때 2가지 경우만을 나누었다. 하지만, 이 문제의 경우 그에 해당하지 않는 경우가 있다. 바로 <b>현재의 포도주를 마시지 않는 경우</b>이다.<br />
+ 계단 오르기 문제는, 반드시 마지막 계단을 밟아야 하므로, dp를 구현할 때 현재의 경우는 항상 포함하는 걸로 생각하면 끝이었다. 포도주는 마지막 포도주를 반드시 마실 필요가 없으므로, 현재를 마시지 않는 경우도 고려해줘야 한다.<br />
+ 이는, 다음 <a href="https://www.acmicpc.net/board/view/39482" target="blank">테스트케이스</a>로 확인할 수 있다. 올바른 답은 20(2+1+8+9)지만, 현재 포도주를 마시는 경우를 고려하지 않아 19가 나왔다.<br />
+ 6<br />   2 1 0 0 8 9<br /></p>
+
+    <p>1) base case<br />
+     0번째와 1번째에 대해서 초기화를 해주면 된다.<br /><br />
+ 2) 점화식<br />
+     <code class="highlighter-rouge">dp[n][0] = max(dp[n-1]);</code><br />
+     <code class="highlighter-rouge">dp[n][1] = wine[n] + max(dp[n-2]);</code><br />
+     <code class="highlighter-rouge">dp[n][2] = wine[n] + dp[n-1][1];</code><br /></p>
+  </li>
+</ol>
+
+<h2 id="section-2">코드</h2>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34</pre></td><td class="code"><pre>    <span class="cp">#include &lt;iostream&gt;
+</span>    <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+    <span class="k">const</span> <span class="kt">int</span> <span class="n">MAX</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">N</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">wine</span><span class="p">[</span><span class="n">MAX</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">dp</span><span class="p">[</span><span class="n">MAX</span><span class="p">][</span><span class="mi">4</span><span class="p">];</span>
+
+    <span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+        <span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+        <span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>  <span class="n">cout</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+
+        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">N</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">wine</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="p">}</span>
+
+        <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>         <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">wine</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>   <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="n">wine</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>   <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span><span class="o">=</span><span class="n">wine</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+        <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">wine</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>   <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">wine</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>   <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="n">wine</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">wine</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>   <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span><span class="o">=</span><span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+
+        <span class="kt">int</span> <span class="n">res</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">3</span><span class="p">]);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">3</span><span class="p">];</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">wine</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">wine</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]),</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]);</span>
+            
+            <span class="k">if</span><span class="p">(</span><span class="n">res</span><span class="o">&lt;</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">])</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">];</span>
+        <span class="p">}</span>
+
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">res</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h2 id="section-3">결과</h2>
+<p><img src="/assets/algorithm/BOJ-2156-result.png" title="[백준] 2156 포도주 시식" /><br /><br /></p>
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/dp">dp</a>,&nbsp;<a href="/tag/백준">백준</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=%5B%EB%B0%B1%EC%A4%80%5D+2156+%ED%8F%AC%EB%8F%84%EC%A3%BC+%EC%8B%9C%EC%8B%9D&url=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2019%2F08%2F15%2F%25EB%25B0%25B1%25EC%25A4%2580-2156.html&via="
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=%5B%EB%B0%B1%EC%A4%80%5D+2156+%ED%8F%AC%EB%8F%84%EC%A3%BC+%EC%8B%9C%EC%8B%9D&u=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2019%2F08%2F15%2F%25EB%25B0%25B1%25EC%25A4%2580-2156.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2019%2F08%2F15%2F%25EB%25B0%25B1%25EC%25A4%2580-2156.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      <a href="//plus.google.com/share?title=%5B%EB%B0%B1%EC%A4%80%5D+2156+%ED%8F%AC%EB%8F%84%EC%A3%BC+%EC%8B%9C%EC%8B%9D&url=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2019%2F08%2F15%2F%25EB%25B0%25B1%25EC%25A4%2580-2156.html"
+        onclick="window.open(this.href, 'google-plus-share', 'width=550,height=255');return false;">
+        <i class="fa fa-google-plus-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+      <a href="//www.pinterest.com/pin/create/button/?description=%5B%EB%B0%B1%EC%A4%80%5D+2156+%ED%8F%AC%EB%8F%84%EC%A3%BC+%EC%8B%9C%EC%8B%9D&url=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2019%2F08%2F15%2F%25EB%25B0%25B1%25EC%25A4%2580-2156.html&media=http://gyurinida.github.io/assets/header_image.jpg"
+        onclick="window.open(this.href, 'pinterest-share', 'width=550,height=255');return false;">
+        <i class="fa fa-pinterest-square fa-lg"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://gyurinida.github.io/algorithm/2019/08/15/%EB%B0%B1%EC%A4%80-2156.html') + '&title=[백준] 2156 포도주 시식'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Marauders Map by GYURIN</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+          <li class="nav-link"><a href="/typography/">Typography</a>
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:gyurinida@naver.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">gyurinida@naver.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/gyurinida" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">gyurinida</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">I solemnly swear that I am up to no perfect.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

@@ -1,0 +1,155 @@
+---
+layout: post
+title:  "[백준] 9376 탈옥"
+author: Gyurin
+categories: algorithm
+tags: BFS 백준
+---
+
+
+## 문제
+<a href="https://www.acmicpc.net/problem/9376" target="blank">
+  <img src="{{site.baseurl}}/assets/algorithm/BOJ-9376-problem.png" title="[백준] 9376 탈옥">
+</a>
+
+## 아이디어
+우선, 길찾기이므로 BFS를 기본으로 두었고 추가로 고려해야할 것이 2가지가 있다. 첫 번째는, 최단거리가 아닌 문을 최소로 여는 경로일것. 두 번째는 2명을 탈출시키는 것이다.<br>
+맨 처음에는, 첫 번째를 위해 지금까지 문을 연 횟수로 우선순위를 갖는 priority queue를 사용하려했다. 하지만 문제 특성상, 큐에 새로 추가가 될 때는 현재 연 문의 갯수와 같거나 +1이므로 큐의 앞과 뒤에만 추가하는 식으로 구현하면 된다. 그래서 deque(doble ended queue)를 사용했다.<br>
+두 번째로, 2명을 탈출시키는 방법은, 각각의 죄수에 대해 BFS를 하려다가 같은 문, 다른 문을 이용해서 나가는 경우들을 어떻게 처리할지 몰라 다른 사람들의 풀이를 참조하였다. ~~사람들 대단..~~ 우선, 문제를 다른 관점에서 생각해보자. 2명이 탈출한다는 것을 죄수 2명과 밖에 있던 상근이가 한 곳에서 만난다는 것으로 해석할 수 있다. 감옥 안에서 밖으로 나간다는 것을 밖에 있던 상근이가 움직인 것으로 본 것이다. 또한, 만나는 위치는 감옥 안이 될 수도 있고 감옥 밖이 될 수도 있다. 전자의 경우 2명이 감옥 안에서 같은 탈출구로 탈출하는 것이고, 후자는 서로 다른 곳으로 탈출한 경우다. 후자의 예시는 다음과 같다.<br>
+{% highlight c++ %}
+1
+5 5
+*****
+*.#.*
+.$#$.
+*.#.*
+*****
+{% endhighlight %}
+그럼 이제, 최소의 문을 열도록 하는 방법이다. 한 사람에 대해 BFS를 진행할 때, 단순히 방문 여부만 true/false로 처리하는 것이 아니라, 현 위치까지 연 문의 갯수를 vst에 저장한다. 각 위치(r, c)에 대해, vst의 합이 최소인 곳이 정답이 된다.
+
+
+1. 변수 <br>
+    `const int MAX = 102`: 평면도의 높이 h와 너비 w의 최대가 100이고, 상하좌우로 +1씩 맵을 늘릴 예정이므로 1+100+1=102가 된다.<br>
+    `char map[MAX]`: 평면도의 정보를 저장<br>
+    `pair<int, int> human[3]`: 죄수 2명과 밖에 있는 상근이의 위치 r, c를 저장 <br>
+    `int vst[3][MAX][MAX]`: human의 3명에 대해 평면도의 방문정보를 저장<br>
+    `deque<pair<int, int> > dq`: BFS를 수행하기 위한 큐<br>
+
+2. 코드 구성<br>
+    1) 변수 초기화 및 입력 처리<br>
+        : 여러 테스트케이스가 한 번에 들어오므로 map, vst 변수를 초기화한다. 감옥 밖에 있는 상근이의 위치를 표현하기 위해 맵을 상하좌우 한 칸씩 늘려준다.<br>
+        
+    2) 탐색<br>
+        : 죄수 2명과 상근이에 대해 각각 bfs를 진행. 문을 최소로 열어야 하므로 문을 새로 열었다면 큐의 맨 뒤에, 문을 열지 않고 이동했다면 큐의 맨 앞에 추가해준다.<br>
+        
+    3) 계산<br>
+        : vst변수를 보며 벽이 아닌 곳 중 합이 최소인 곳을 찾는다. 이 때, 문인 곳은 -2를 해준다. 하나의 문을 3번 열었다고 계산되었기 때문이다.<br>
+
+    
+## 코드
+{% highlight c++ linenos=table %}
+#include <iostream>
+#include <deque>
+#include <cstring>
+using namespace std;
+
+const int MAX = 102;
+int T, H, W, res;
+char map[MAX][MAX];
+pair<int, int> human[3];
+int vst[3][MAX][MAX];
+
+void bfs(int p, int r, int c){
+    
+    int dr[4] = {1, -1, 0, 0};
+    int dc[4] = {0, 0, 1, -1};
+
+    deque<pair<int, int> > dq;
+    dq.push_back(make_pair(r, c));
+    vst[p][r][c] = 0;
+
+    while(!dq.empty()){
+        pair<int, int> u = dq.front();  dq.pop_front();
+        
+        for(int i=0; i<4; i++){
+            int nr = u.first + dr[i];
+            int nc = u.second + dc[i];
+
+            if(nr<0 || nr>=H+2 || nc<0 || nc>=W+2)
+                continue;
+
+            if(vst[p][nr][nc]==-1 && map[nr][nc]=='.'){
+                vst[p][nr][nc] = vst[p][u.first][u.second];
+                dq.push_front(make_pair(nr, nc));
+            }
+            if(vst[p][nr][nc]==-1 && map[nr][nc]=='#'){
+                vst[p][nr][nc] = vst[p][u.first][u.second]+1;
+                dq.push_back(make_pair(nr, nc));
+            }
+        }
+    }
+}
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);  cout.tie(NULL);
+
+    cin >> T;
+    for(int t=0; t<T; t++){
+        cin >> H >> W;
+
+        // 초기화
+        memset(map, '.', sizeof(map));
+        for(int p=0; p<3; p++){
+            for(int r=0; r<H+2; r++){
+                for(int c=0; c<W+2; c++){
+                    vst[p][r][c] = -1;
+                }
+            }
+        }
+        human[0] = make_pair(0, 0);
+
+        // 인풋
+        bool flag = false;
+        for(int r=1; r<=H; r++){
+            for(int c=1; c<=W; c++){
+                cin >> map[r][c];
+                if(map[r][c]=='$'){
+                    map[r][c] = '.';
+                    if(!flag){
+                        human[1] = make_pair(r, c);
+                        flag = true;
+                    }
+                    else
+                        human[2] = make_pair(r, c);
+
+                }
+            }
+        }
+        
+        //탐색
+        for(int i=0; i<3; i++)
+            bfs(i, human[i].first, human[i].second);
+    
+        // 계산
+        res = 987654321;
+        for(int r=0; r<H+2; r++){
+            for(int c=0; c<W+2; c++){
+                if(map[r][c]=='*')
+                    continue;
+                int sum = vst[0][r][c] + vst[1][r][c] + vst[2][r][c];
+                if(map[r][c]=='#')
+                    sum -= 2;
+                res = res>sum?sum:res;
+            }
+        }
+    
+        cout << res << "\n";
+    }
+    return 0;
+}
+
+{% endhighlight %}
+
+## 결과
+<img src="{{site.baseurl}}/assets/algorithm/BOJ-9376-result.png" title="[백준] 9376 탈옥"><br><br>

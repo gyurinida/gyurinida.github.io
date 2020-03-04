@@ -3,7 +3,7 @@ layout: post
 title:  "[백준] 2156 포도주 시식"
 author: Gyurin
 categories: algorithm
-tags: dp 백준
+tags: DP 백준
 ---
 
 

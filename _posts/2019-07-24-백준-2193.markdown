@@ -3,7 +3,7 @@ layout: post
 title:  "[백준] 2193 이친수"
 author: Gyurin
 categories: algorithm
-tags:   dp 백준
+tags: DP 백준
 ---
 
 ## 문제

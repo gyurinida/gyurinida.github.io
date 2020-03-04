@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>[백준] 2193 이친수</title>
+  <title>[백준] 11053 가장 긴 증가하는 부분 수열</title>
   <meta name="description" content="문제  ">
   
   <meta name="author" content="Gyurin Hwang">
@@ -44,7 +44,7 @@
   <meta property="og:description" content="문제  " />
   <meta property="og:url" content="http://gyurinida.github.io" />
   <meta property="og:site_name" content="Marauders Map by GYURIN" />
-  <meta property="og:title" content="[백준] 2193 이친수" />
+  <meta property="og:title" content="[백준] 11053 가장 긴 증가하는 부분 수열" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="http://gyurinida.github.io/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
@@ -55,7 +55,7 @@
   
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="[백준] 2193 이친수">
+  <meta name="twitter:title" content="[백준] 11053 가장 긴 증가하는 부분 수열">
   <meta name="twitter:description" content="문제  ">
   <meta name="twitter:image" content="http://gyurinida.github.io/assets/logo.png">
   <meta name="twitter:url" content="http://gyurinida.github.io">
@@ -65,7 +65,7 @@
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://gyurinida.github.io/algorithm/2019/07/24/%EB%B0%B1%EC%A4%80-2193.html">
+  <link rel="canonical" href="http://gyurinida.github.io/algorithm/2020/01/20/%EB%B0%B1%EC%A4%80-11053.html">
   <link rel="alternate" type="application/rss+xml" title="Marauders Map by GYURIN" href="http://gyurinida.github.io/feed.xml" />
 </head>
 
@@ -121,7 +121,7 @@
 <div class="post-header-container " >
   <div class="scrim ">
     <header class="post-header">
-      <h1 class="title">[백준] 2193 이친수</h1>
+      <h1 class="title">[백준] 11053 가장 긴 증가하는 부분 수열</h1>
       <p class="info">by <strong>Gyurin</strong></p>
     </header>
   </div>
@@ -136,7 +136,7 @@
  
 
 <section class="post-meta">
-  <div class="post-date">July 24, 2019</div>
+  <div class="post-date">January 20, 2020</div>
   <div class="post-categories">
   in 
     
@@ -148,26 +148,31 @@
 
 <article class="post-content">
   <h2 id="section">문제</h2>
-<p><a href="https://www.acmicpc.net/problem/2193" target="blank">
-  <img src="/assets/algorithm/BOJ-2193-problem.png" title="[백준] 2193 이친수" />
+<p><a href="https://www.acmicpc.net/problem/11053" target="blank">
+  <img src="/assets/algorithm/BOJ-11053-problem.png" title="[백준] 11053 가장 긴 증가하는 부분 수열" />
 </a></p>
 
 <h2 id="section-1">아이디어</h2>
+<p>새삼 느끼지만 DP문제는 2가지가 중요한 것 같다. dp[n]을 어떻게 정의할 것인가와 dp값을 정의에 맞게 어떻게 계산할 것인가. 이 문제는 <a href="/algorithm/2019/07/22/백준-1912.html" target="blank">연속합 문제(1912)</a> 때의 기억으로, dp[i]를 A[i]로 끝나는 가장 긴 부분 수열의 길이로 정의하고 A[i]를 알기 위해 0부터 i-1까지 탐색하면 된다.<br /></p>
+
 <ol>
   <li>
-    <p>변수<br />
- <code class="highlighter-rouge">dp[last][len]</code>은 길이가 <code class="highlighter-rouge">len</code>이고 <code class="highlighter-rouge">last</code>로 끝나는 이친수의 갯수를 담는다.<br /><br /></p>
+    <p>변수 <br />
+ <code class="highlighter-rouge">const int MAX = 1001</code>: 반복문에서 편한 처리를 위해 0번째 인덱스를 만들 예정이라 1000+1이다.<br />
+ <code class="highlighter-rouge">int A[MAX]</code>: 인풋으로 받는 수열.<br />
+ <code class="highlighter-rouge">int dp[MAX]</code>: dp[i]는 A[i]로 끝나는 가장 긴 부분수열의 길이를 담는다.<br />
+ <code class="highlighter-rouge">int res</code>: 정답. 수열 전체에서 가장 긴 부분수열의 길이.<br /></p>
   </li>
   <li>
-    <p>알고리즘<br />
- bottom-up 방식으로 구현하였다.<br />
- 길이가 n인 이친수의 맨 뒤에 한 자리를 늘려 길이가 n+1인 이친수의 개수를 확인했다.<br /><br />
- 1) base case<br />
-     1 ≤ N ≤ 90 이므로 N이 1인 경우와, 2인 경우를 미리 계산해주었다.<br />
-     N=1인 이친수는 1<sub>(2)</sub> 한 가지이므로 <code class="highlighter-rouge">dp[0][1]=0</code>, <code class="highlighter-rouge">dp[1][1]=1</code>이 된다.<br />
-     같은 방식으로 N=2인 이친수는 10<sub>(2)</sub> 한 가지이므로 <code class="highlighter-rouge">dp[0][2]=1</code>, <code class="highlighter-rouge">dp[1][2]=0</code>이다.<br /><br />
- 2) 11을 부분 문자열로 갖지 않음<br />
-     위의 성질을 만족하기 위해, 길이가 n인 이친수를 0으로 끝날 때, 1로 끝날 때로 분류했다. 길이가 n+1인 이친수 중 0으로 끝나는 경우는 <code class="highlighter-rouge">dp[0][n]+dp[1][n]</code>, 1로 끝나는 경우는 <code class="highlighter-rouge">dp[0][n]</code>가지이다.<br /></p>
+    <p>코드 구성<br />
+ 1) 입력 처리<br />
+     : 0번째는 0으로 채울 예정이라 1번째부터 N번째까지 입력을 받는다.<br /></p>
+
+    <p>2) DP 채우기 (bottom-up)<br />
+     : dp[i]를 알기위해, 0번째부터 i-1번째까지 돌며 확인한다. len이란 변수를 이용해서, A[j]값이 A[i]보다 작고 len이 dp[j]보다 작거나 같으면, A[j]로 끝나는 가장 긴 증가하는 부분 수열에 A[i]를 추가할 수 있다는 의미이므로 len을 증가시켜준다. 최종 len이 dp[i]가 된다.<br /></p>
+
+    <p>3) 정답 업데이트<br />
+     : 현재 res값과 새로 채운 dp[i]를 비교하여 큰 값으로 res를 업데이트한다.<br /></p>
   </li>
 </ol>
 
@@ -196,34 +201,40 @@
 21
 22
 23
-24</pre></td><td class="code"><pre><span class="cp">#include &lt;iostream&gt;
+24
+25
+26
+27</pre></td><td class="code"><pre><span class="cp">#include &lt;iostream&gt;
 </span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAX</span> <span class="o">=</span> <span class="mi">91</span><span class="p">;</span>
-<span class="kt">long</span> <span class="n">dp</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">MAX</span><span class="p">];</span>
-
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAX</span> <span class="o">=</span> <span class="mi">1001</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">N</span><span class="p">,</span> <span class="n">res</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">A</span><span class="p">[</span><span class="n">MAX</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">MAX</span><span class="p">];</span>    <span class="c1">//dp[i]: A[i]로 끝나는 가장 긴 부분수열의 길이
+</span>
 <span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
     <span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
     <span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>  <span class="n">cout</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
 
-    <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>   <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>   <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>   <span class="c1">// 1
-</span>    <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>   <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>   <span class="c1">// 10
-</span>
-    <span class="kt">int</span> <span class="n">N</span><span class="p">;</span>  <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">N</span><span class="p">;</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">N</span><span class="o">&gt;=</span><span class="mi">3</span><span class="p">){</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-            <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
-            <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">N</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">i</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">len</span><span class="o">&lt;=</span><span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                <span class="n">len</span><span class="o">++</span><span class="p">;</span>
         <span class="p">}</span>
+        <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">len</span><span class="p">;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">res</span><span class="o">&lt;</span><span class="n">len</span><span class="o">?</span><span class="n">len</span><span class="o">:</span><span class="n">res</span><span class="p">;</span>
     <span class="p">}</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">N</span><span class="p">]</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">N</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">res</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span><span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
 <h2 id="section-3">결과</h2>
-<p><img src="/assets/algorithm/BOJ-2193-result.png" title="[백준] 2193 이친수" /></p>
+<p><img src="/assets/algorithm/BOJ-11053-result.png" title="[백준] 11053 가장 긴 증가하는 부분 수열" /><br /><br /></p>
 
 </article>
 
@@ -244,7 +255,7 @@
   
     
     
-      <a href="//twitter.com/share?text=%5B%EB%B0%B1%EC%A4%80%5D+2193+%EC%9D%B4%EC%B9%9C%EC%88%98&url=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2019%2F07%2F24%2F%25EB%25B0%25B1%25EC%25A4%2580-2193.html&via="
+      <a href="//twitter.com/share?text=%5B%EB%B0%B1%EC%A4%80%5D+11053+%EA%B0%80%EC%9E%A5+%EA%B8%B4+%EC%A6%9D%EA%B0%80%ED%95%98%EB%8A%94+%EB%B6%80%EB%B6%84+%EC%88%98%EC%97%B4&url=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2020%2F01%2F20%2F%25EB%25B0%25B1%25EC%25A4%2580-11053.html&via="
         onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
         <i class="fa fa-twitter-square fa-lg"></i>
       </a>
@@ -259,7 +270,7 @@
     
     
     
-      <a href="//www.facebook.com/sharer.php?t=%5B%EB%B0%B1%EC%A4%80%5D+2193+%EC%9D%B4%EC%B9%9C%EC%88%98&u=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2019%2F07%2F24%2F%25EB%25B0%25B1%25EC%25A4%2580-2193.html"
+      <a href="//www.facebook.com/sharer.php?t=%5B%EB%B0%B1%EC%A4%80%5D+11053+%EA%B0%80%EC%9E%A5+%EA%B8%B4+%EC%A6%9D%EA%B0%80%ED%95%98%EB%8A%94+%EB%B6%80%EB%B6%84+%EC%88%98%EC%97%B4&u=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2020%2F01%2F20%2F%25EB%25B0%25B1%25EC%25A4%2580-11053.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -284,7 +295,7 @@
     
     
     
-      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2019%2F07%2F24%2F%25EB%25B0%25B1%25EC%25A4%2580-2193.html"
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2020%2F01%2F20%2F%25EB%25B0%25B1%25EC%25A4%2580-11053.html"
         onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
         <i class="fa fa-linkedin-square fa-lg"></i>
       </a>
@@ -297,7 +308,7 @@
     
     
     
-      <a href="//plus.google.com/share?title=%5B%EB%B0%B1%EC%A4%80%5D+2193+%EC%9D%B4%EC%B9%9C%EC%88%98&url=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2019%2F07%2F24%2F%25EB%25B0%25B1%25EC%25A4%2580-2193.html"
+      <a href="//plus.google.com/share?title=%5B%EB%B0%B1%EC%A4%80%5D+11053+%EA%B0%80%EC%9E%A5+%EA%B8%B4+%EC%A6%9D%EA%B0%80%ED%95%98%EB%8A%94+%EB%B6%80%EB%B6%84+%EC%88%98%EC%97%B4&url=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2020%2F01%2F20%2F%25EB%25B0%25B1%25EC%25A4%2580-11053.html"
         onclick="window.open(this.href, 'google-plus-share', 'width=550,height=255');return false;">
         <i class="fa fa-google-plus-square fa-lg"></i>
       </a>
@@ -331,7 +342,7 @@
     
     
     
-      <a href="//www.pinterest.com/pin/create/button/?description=%5B%EB%B0%B1%EC%A4%80%5D+2193+%EC%9D%B4%EC%B9%9C%EC%88%98&url=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2019%2F07%2F24%2F%25EB%25B0%25B1%25EC%25A4%2580-2193.html&media=http://gyurinida.github.io/assets/header_image.jpg"
+      <a href="//www.pinterest.com/pin/create/button/?description=%5B%EB%B0%B1%EC%A4%80%5D+11053+%EA%B0%80%EC%9E%A5+%EA%B8%B4+%EC%A6%9D%EA%B0%80%ED%95%98%EB%8A%94+%EB%B6%80%EB%B6%84+%EC%88%98%EC%97%B4&url=http%3A%2F%2Fgyurinida.github.io%2Falgorithm%2F2020%2F01%2F20%2F%25EB%25B0%25B1%25EC%25A4%2580-11053.html&media=http://gyurinida.github.io/assets/header_image.jpg"
         onclick="window.open(this.href, 'pinterest-share', 'width=550,height=255');return false;">
         <i class="fa fa-pinterest-square fa-lg"></i>
       </a>
@@ -400,7 +411,7 @@
     
     
     
-      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://gyurinida.github.io/algorithm/2019/07/24/%EB%B0%B1%EC%A4%80-2193.html') + '&title=[백준] 2193 이친수'; return false">
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://gyurinida.github.io/algorithm/2020/01/20/%EB%B0%B1%EC%A4%80-11053.html') + '&title=[백준] 11053 가장 긴 증가하는 부분 수열'; return false">
         <i class="fa fa-reddit-square fa-lg"></i>
       </a>
     

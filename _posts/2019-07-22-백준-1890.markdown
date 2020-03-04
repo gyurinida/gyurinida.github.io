@@ -3,7 +3,7 @@ layout: post
 title:  "[백준] 1890 점프"
 author: Gyurin
 categories: algorithm
-tags: dp 백준
+tags: DP 백준
 ---
 
 ## 문제
